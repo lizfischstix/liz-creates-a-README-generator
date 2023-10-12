@@ -11,11 +11,39 @@ inquirer
 },
 
 {
-type:
-}
+type:"input",
+message:"Enter project title",
+name:'title',
+},
+{
+  Type: 'input',
+  message: 'Provide a short description explaining the what, why, and how of your project.',
+  name: 'description',
+},
 
+{
+  Type: 'input',
+  message: 'what are the steps to install your project?',
+  name: 'installation',
+},
+
+{
+  Type: 'input',
+  message: 'list any collaborators, assets that need attribution, and links to tutorals used',
+  name: 'credits',
+},
+
+{
+  Type: 'input',
+  message: 'if your project has a lot of features, list them here',
+  name: 'features',
+},
 ])
-
+.then(function(userInput){
+  console.log(userInput);
+  fs.writeFile("README.md", generateMarkdown(userInput),err =>
+  err ? console.log(err) : console.log('success!'))
+})
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
 function renderLicenseBadge(license) {}
@@ -30,10 +58,14 @@ function renderLicenseSection(license) {
 }
 
 // TODO: Create a function to generate markdown for README
-function generateMarkdown(data) {
+function generateMarkdown(userInput) {
   console.log();
-  return `# ${data.title}
-
+  return `# ${userInput.title}
+  ## Description: ${userInput.decription}
+  ## Installation: ${userInput.installation}
+  ## Credits: ${userInput.credits}
+  ## Features: ${userInput.features}
+  ## Licence:
 `;
 }
 
